@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.32002.261
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SuperSport.API", "SuperSport.API\SuperSport.API.csproj", "{2C7CE4B2-F562-4E2A-9877-F1C43DDBEEBF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2C7CE4B2-F562-4E2A-9877-F1C43DDBEEBF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2C7CE4B2-F562-4E2A-9877-F1C43DDBEEBF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2C7CE4B2-F562-4E2A-9877-F1C43DDBEEBF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2C7CE4B2-F562-4E2A-9877-F1C43DDBEEBF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {DFC808F6-9B9E-4126-AB0D-888936EC1963}
+	EndGlobalSection
+EndGlobal
