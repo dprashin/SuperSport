@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using SuperSport.API.Classes;
 using SuperSport.API.Models;
 using System;
 using System.Collections.Generic;
@@ -20,10 +21,16 @@ namespace SuperSport.API.Controllers {
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetProducts() {
-            var products = await _shopContext.Products.ToArrayAsync();
-            return Ok(products);
+        public async Task<IActionResult> GetProducts([FromQuery] QueryParameters queryParameters) {
+            IQueryable<Product> products = _shopContext.Products;
+
+            products = products
+                    .Skip(queryParameters.Size * (queryParameters.Page - 1))
+                    .Take(queryParameters.Size);
+
+            return Ok(await products.ToArrayAsync());
         }
+
         [HttpGet("{id}")]
         public async Task<IActionResult> GetProduct(int id) {
             var product = await _shopContext.Products.FindAsync(id);
