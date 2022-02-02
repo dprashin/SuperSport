@@ -23,5 +23,16 @@ namespace SuperSport.API.Controllers {
             var products = _shopContext.Products.ToArray();
             return Ok(products);
         }
+        [HttpGet("{id}")]
+        public IActionResult GetProduct(int id) {
+            var product = _shopContext.Products.Find(id);
+
+            if(product == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(product);
+        }
     }
 }
