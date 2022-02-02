@@ -19,8 +19,9 @@ namespace SuperSport.API.Controllers {
         }
 
         [HttpGet]
-        public IEnumerable<Product> GetProducts() {
-            return _shopContext.Products.ToArray();
+        public IActionResult GetProducts() {
+            var products = _shopContext.Products.ToArray();
+            return Ok(products);
         }
     }
 }
