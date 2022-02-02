@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using SuperSport.API.Models;
 using System;
 using System.Collections.Generic;
@@ -19,13 +20,13 @@ namespace SuperSport.API.Controllers {
         }
 
         [HttpGet]
-        public IActionResult GetProducts() {
-            var products = _shopContext.Products.ToArray();
+        public async Task<IActionResult> GetProducts() {
+            var products = await _shopContext.Products.ToArrayAsync();
             return Ok(products);
         }
         [HttpGet("{id}")]
-        public IActionResult GetProduct(int id) {
-            var product = _shopContext.Products.Find(id);
+        public async Task<IActionResult> GetProduct(int id) {
+            var product = await _shopContext.Products.FindAsync(id);
 
             if(product == null)
             {
