@@ -31,6 +31,12 @@ namespace SuperSport.API.Controllers {
                          p.Price <= queryParameters.MaxPrice.Value);
             }
 
+            if (!string.IsNullOrEmpty(queryParameters.SearchString))
+            {
+                products = products.Where(p => p.Sku.ToLower().Contains(queryParameters.SearchString.ToLower()) ||
+                                               p.Name.ToLower().Contains(queryParameters.SearchString.ToLower()));
+            }
+
             if (!string.IsNullOrEmpty(queryParameters.Sku))
             {
                 products = products.Where(p => p.Sku == queryParameters.Sku);
