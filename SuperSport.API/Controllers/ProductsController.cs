@@ -85,5 +85,31 @@ namespace SuperSport.API.Controllers {
                 new { id = product.Id },
                 product);
         }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> PutProduct([FromRoute]int id, [FromBody]Product product) {
+            if(id != product.Id)
+            {
+                return BadRequest();
+            }
+
+            _shopContext.Entry(product).State = EntityState.Modified;
+
+            try
+            {
+                await _shopContext.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if(_shopContext.Products.Find(id) == null)
+                {
+                    return NotFound();
+                }
+                throw;
+            }
+
+            return NoContent();
+        }
+
     }
 }
