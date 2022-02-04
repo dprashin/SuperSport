@@ -21,8 +21,20 @@ namespace SuperSport.API.Controllers {
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetProducts([FromQuery] QueryParameters queryParameters) {
+        public async Task<IActionResult> GetProducts([FromQuery] ProductQueryParameters queryParameters) {
             IQueryable<Product> products = _shopContext.Products;
+
+            if (queryParameters.MinPrice != null && queryParameters.MaxPrice != null)
+            {
+                products = products.Where(
+                    p => p.Price >= queryParameters.MinPrice.Value &&
+                         p.Price <= queryParameters.MaxPrice.Value);
+            }
+
+            if (!string.IsNullOrEmpty(queryParameters.Sku))
+            {
+                products = products.Where(p => p.Sku == queryParameters.Sku);
+            }
 
             products = products
                     .Skip(queryParameters.Size * (queryParameters.Page - 1))
@@ -35,7 +47,7 @@ namespace SuperSport.API.Controllers {
         public async Task<IActionResult> GetProduct(int id) {
             var product = await _shopContext.Products.FindAsync(id);
 
-            if(product == null)
+            if (product == null)
             {
                 return NotFound();
             }
