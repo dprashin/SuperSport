@@ -124,5 +124,28 @@ namespace SuperSport.API.Controllers {
             //return product or NoContent
             return product;
         }
+
+        [HttpPost]
+        [Route("Delete")]
+        public async Task<IActionResult> DeleteMultipleProducts([FromQuery]int[] ids) {
+
+            //store list of products found in the database
+            var products = new List<Product>();
+
+            foreach(var id in ids){
+                var product = await _shopContext.Products.FindAsync(id);
+                if(product == null)
+                {
+                    return NotFound();
+                }
+                products.Add(product);
+            }
+
+            _shopContext.Products.RemoveRange(products);
+            await _shopContext.SaveChangesAsync();
+
+            //return product or NoContent
+            return Ok(products);
+        }
     }
 }
