@@ -25,7 +25,14 @@ namespace SuperSport.API {
         public void ConfigureServices(IServiceCollection services) {
             services.AddDbContext<ShopContext>(options =>
             options.UseInMemoryDatabase("SuperShop"));
-            services.AddControllers();
+            services.AddControllers()
+                    .ConfigureApiBehaviorOptions(options =>
+                    {
+                        //disable automated validation - meaning HTTP model validation error(HTTP 400) won't be sent to Users.
+                        //Then, have to handle this scenario manually. Think!!!
+
+                        //options.SuppressModelStateInvalidFilter = true;
+                    });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
