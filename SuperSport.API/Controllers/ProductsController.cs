@@ -74,5 +74,16 @@ namespace SuperSport.API.Controllers {
 
             return Ok(product);
         }
+
+        [HttpPost]
+        public async Task<ActionResult<Product>> PostProduct([FromBody] Product product) {
+            _shopContext.Products.Add(product);
+            await _shopContext.SaveChangesAsync();
+
+            return CreatedAtAction(
+                "GetProduct",
+                new { id = product.Id },
+                product);
+        }
     }
 }
